@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "615967067191",
+    "firebase_url": "https://notexapi-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "notexapi",
+    "storage_bucket": "notexapi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:615967067191:android:464767d669b705035303b2",
+        "android_client_info": {
+          "package_name": "com.notexCreator.com"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "615967067191-nc2e37gru8q500ch62n9qsn3rpjfqhi5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.notexCreator.com",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "615967067191-qvvpo4s5oqd4qufhbta2300le0oj71c5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKqFlw818qEG_u-bNNU7vDGkAfiIYX5l0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "615967067191-qvvpo4s5oqd4qufhbta2300le0oj71c5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "615967067191-ckk85fvn02hndkhsvcnno6qp943i7dk7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.notexCreator.com"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
