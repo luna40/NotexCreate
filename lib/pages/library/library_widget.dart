@@ -1,3 +1,4 @@
+import '/components/downloads_widget.dart';
 import '/components/list_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -52,7 +53,7 @@ class _LibraryWidgetState extends State<LibraryWidget> {
           desktop: false,
         )
             ? PreferredSize(
-                preferredSize: const Size.fromHeight(100.0),
+                preferredSize: const Size.fromHeight(50.0),
                 child: AppBar(
                   backgroundColor:
                       FlutterFlowTheme.of(context).primaryBackground,
@@ -167,14 +168,18 @@ class _LibraryWidgetState extends State<LibraryWidget> {
                                   ),
                                 ),
                                 wrapWithModel(
-                                  model: _model.listModel1,
+                                  model: _model.listModel,
                                   updateCallback: () => setState(() {}),
-                                  child: const ListWidget(),
+                                  child: const ListWidget(
+                                    type: 'Downloads',
+                                    about: 'Here are your downloads...',
+                                  ),
                                 ),
                               ],
                             ),
                             Column(
                               mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Container(
                                   width: double.infinity,
@@ -212,11 +217,17 @@ class _LibraryWidgetState extends State<LibraryWidget> {
                                     ],
                                   ),
                                 ),
-                                wrapWithModel(
-                                  model: _model.listModel2,
-                                  updateCallback: () => setState(() {}),
-                                  child: const ListWidget(
-                                    type: 'Public ',
+                                Container(
+                                  width: double.infinity,
+                                  height: 2900.0,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
+                                  ),
+                                  child: wrapWithModel(
+                                    model: _model.downloadsModel,
+                                    updateCallback: () => setState(() {}),
+                                    child: const DownloadsWidget(),
                                   ),
                                 ),
                               ],

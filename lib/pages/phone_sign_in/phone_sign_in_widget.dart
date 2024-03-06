@@ -1,4 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -50,8 +51,8 @@ class _PhoneSignInWidgetState extends State<PhoneSignInWidget>
     super.initState();
     _model = createModel(context, () => PhoneSignInModel());
 
-    _model.phoneNumberController ??= TextEditingController();
-    _model.phoneNumberFocusNode ??= FocusNode();
+    _model.textController ??= TextEditingController();
+    _model.textFieldFocusNode ??= FocusNode();
 
     authManager.handlePhoneAuthStateChanges(context);
     setupAnimations(
@@ -181,57 +182,67 @@ class _PhoneSignInWidgetState extends State<PhoneSignInWidget>
                   ),
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(24.0, 16.0, 24.0, 0.0),
-                    child: TextFormField(
-                      controller: _model.phoneNumberController,
-                      focusNode: _model.phoneNumberFocusNode,
-                      autofocus: true,
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        labelText: 'Your Phone Number',
-                        labelStyle: FlutterFlowTheme.of(context).labelMedium,
-                        hintText: 'Please enter a valid number...',
-                        hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).alternate,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(12.0),
+                        const EdgeInsetsDirectional.fromSTEB(20.0, 24.0, 20.0, 0.0),
+                    child: Container(
+                      width: double.infinity,
+                      height: 60.0,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                        borderRadius: BorderRadius.circular(12.0),
+                        border: Border.all(
+                          color: FlutterFlowTheme.of(context).alternate,
+                          width: 2.0,
                         ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).secondary,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(12.0),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).error,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(12.0),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).error,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(12.0),
-                        ),
-                        filled: true,
-                        fillColor:
-                            FlutterFlowTheme.of(context).secondaryBackground,
-                        contentPadding: const EdgeInsetsDirectional.fromSTEB(
-                            20.0, 24.0, 20.0, 24.0),
                       ),
-                      style: FlutterFlowTheme.of(context).bodyMedium,
-                      keyboardType: TextInputType.phone,
-                      cursorColor: FlutterFlowTheme.of(context).secondary,
-                      validator: _model.phoneNumberControllerValidator
-                          .asValidator(context),
-                      inputFormatters: [_model.phoneNumberMask],
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Align(
+                            alignment: const AlignmentDirectional(-1.0, 0.0),
+                            child: Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  20.0, 0.0, 0.0, 0.0),
+                              child: Text(
+                                '+254',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Plus Jakarta Sans',
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                    ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  8.0, 0.0, 8.0, 0.0),
+                              child: TextFormField(
+                                controller: _model.textController,
+                                focusNode: _model.textFieldFocusNode,
+                                autofocus: true,
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  labelText: 'Phone Number...',
+                                  labelStyle:
+                                      FlutterFlowTheme.of(context).labelMedium,
+                                  hintText: '768905423',
+                                  hintStyle:
+                                      FlutterFlowTheme.of(context).labelMedium,
+                                  enabledBorder: InputBorder.none,
+                                  focusedBorder: InputBorder.none,
+                                  errorBorder: InputBorder.none,
+                                  focusedErrorBorder: InputBorder.none,
+                                ),
+                                style: FlutterFlowTheme.of(context).bodyMedium,
+                                validator: _model.textControllerValidator
+                                    .asValidator(context),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   Padding(
@@ -239,8 +250,22 @@ class _PhoneSignInWidgetState extends State<PhoneSignInWidget>
                         const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
+                        await currentUserReference!
+                            .update(createUsersRecordData(
+                          email: '',
+                          password: '',
+                          displayName: '',
+                          photoUrl: '',
+                          uid: '',
+                          phoneNumber: '',
+                        ));
+                        setState(() {
+                          FFAppState().registrationnumberApp =
+                              '+254${_model.textController.text}';
+                          FFAppState().email = FFAppState().email;
+                        });
                         final phoneNumberVal =
-                            _model.phoneNumberController.text;
+                            '+254${_model.textController.text}';
                         if (phoneNumberVal.isEmpty ||
                             !phoneNumberVal.startsWith('+')) {
                           ScaffoldMessenger.of(context).showSnackBar(

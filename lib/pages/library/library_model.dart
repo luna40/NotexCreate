@@ -1,3 +1,4 @@
+import '/components/downloads_widget.dart';
 import '/components/list_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'library_widget.dart' show LibraryWidget;
@@ -16,23 +17,23 @@ class LibraryModel extends FlutterFlowModel<LibraryWidget> {
       ? pageViewController!.page!.round()
       : 0;
   // Model for list component.
-  late ListModel listModel1;
-  // Model for list component.
-  late ListModel listModel2;
+  late ListModel listModel;
+  // Model for Downloads component.
+  late DownloadsModel downloadsModel;
 
   /// Initialization and disposal methods.
 
   @override
   void initState(BuildContext context) {
-    listModel1 = createModel(context, () => ListModel());
-    listModel2 = createModel(context, () => ListModel());
+    listModel = createModel(context, () => ListModel());
+    downloadsModel = createModel(context, () => DownloadsModel());
   }
 
   @override
   void dispose() {
     unfocusNode.dispose();
-    listModel1.dispose();
-    listModel2.dispose();
+    listModel.dispose();
+    downloadsModel.dispose();
   }
 
   /// Action blocks are added here.

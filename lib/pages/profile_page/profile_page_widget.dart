@@ -147,16 +147,22 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget>
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(2.0),
-                            child: AuthUserStreamWidget(
-                              builder: (context) => ClipRRect(
+                            child: InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                setState(() {
+                                  FFAppState().userprofilepic = '';
+                                });
+                              },
+                              child: ClipRRect(
                                 borderRadius: BorderRadius.circular(40.0),
                                 child: CachedNetworkImage(
                                   fadeInDuration: const Duration(milliseconds: 500),
                                   fadeOutDuration: const Duration(milliseconds: 500),
-                                  imageUrl: valueOrDefault<String>(
-                                    currentUserPhoto,
-                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/onboarding-flow-6tzaqf/assets/zp81llne12pt/addAvatarImage@2x.png',
-                                  ),
+                                  imageUrl: FFAppState().userprofilepic,
                                   width: 60.0,
                                   height: 60.0,
                                   fit: BoxFit.cover,
@@ -173,21 +179,21 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget>
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              AuthUserStreamWidget(
-                                builder: (context) => Text(
-                                  currentUserDisplayName,
-                                  style: FlutterFlowTheme.of(context)
-                                      .headlineSmall,
-                                ),
+                              Text(
+                                FFAppState().userName,
+                                style: FlutterFlowTheme.of(context)
+                                    .headlineSmall
+                                    .override(
+                                      fontFamily: 'Outfit',
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                    ),
                               ),
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 4.0, 0.0, 0.0),
                                 child: Text(
-                                  valueOrDefault<String>(
-                                    currentUserEmail,
-                                    'ralph@nocodeui.io',
-                                  ),
+                                  FFAppState().email,
                                   style: FlutterFlowTheme.of(context)
                                       .labelMedium
                                       .override(

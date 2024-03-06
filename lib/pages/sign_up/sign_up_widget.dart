@@ -70,9 +70,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                       constraints: const BoxConstraints(
                         maxWidth: 570.0,
                       ),
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
+                      decoration: const BoxDecoration(),
                       child: Padding(
                         padding: const EdgeInsetsDirectional.fromSTEB(
                             20.0, 12.0, 20.0, 12.0),
@@ -337,8 +335,15 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                         return;
                                       }
 
+                                      setState(() {
+                                        FFAppState().email =
+                                            _model.emailAddressController.text;
+                                      });
+                                      if (Navigator.of(context).canPop()) {
+                                        context.pop();
+                                      }
                                       context.pushNamedAuth(
-                                          'createProfile', context.mounted);
+                                          'phoneSignIn', context.mounted);
                                     },
                                     text: 'Sign Up',
                                     options: FFButtonOptions(
@@ -417,7 +422,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                       }
 
                                       context.pushNamedAuth(
-                                          'createProfile', context.mounted);
+                                          'phoneSignIn', context.mounted);
                                     },
                                   ),
                                 ),
@@ -444,7 +449,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                       }
 
                                       context.pushNamedAuth(
-                                          'createProfile', context.mounted);
+                                          'phoneSignIn', context.mounted);
                                     },
                                   ),
                                 ),
@@ -464,8 +469,6 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                     ),
                                     onPressed: () async {
                                       context.pushNamed('phoneSignIn');
-
-                                      context.pushNamed('createProfile');
                                     },
                                   ),
                                 ),

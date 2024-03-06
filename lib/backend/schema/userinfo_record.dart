@@ -30,11 +30,6 @@ class UserinfoRecord extends FirestoreRecord {
   bool get isClassRepresentative => _isClassRepresentative ?? false;
   bool hasIsClassRepresentative() => _isClassRepresentative != null;
 
-  // "name" field.
-  String? _name;
-  String get name => _name ?? '';
-  bool hasName() => _name != null;
-
   // "phoneNumber" field.
   String? _phoneNumber;
   String get phoneNumber => _phoneNumber ?? '';
@@ -50,16 +45,27 @@ class UserinfoRecord extends FirestoreRecord {
   int get yearOfStudy => _yearOfStudy ?? 0;
   bool hasYearOfStudy() => _yearOfStudy != null;
 
+  // "name" field.
+  String? _name;
+  String get name => _name ?? '';
+  bool hasName() => _name != null;
+
+  // "photo_url" field.
+  String? _photoUrl;
+  String get photoUrl => _photoUrl ?? '';
+  bool hasPhotoUrl() => _photoUrl != null;
+
   DocumentReference get parentReference => reference.parent.parent!;
 
   void _initializeFields() {
     _course = snapshotData['course'] as String?;
     _email = snapshotData['email'] as String?;
     _isClassRepresentative = snapshotData['isClassRepresentative'] as bool?;
-    _name = snapshotData['name'] as String?;
     _phoneNumber = snapshotData['phoneNumber'] as String?;
     _registrationNumber = snapshotData['registrationNumber'] as String?;
     _yearOfStudy = castToType<int>(snapshotData['yearOfStudy']);
+    _name = snapshotData['name'] as String?;
+    _photoUrl = snapshotData['photo_url'] as String?;
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -105,20 +111,22 @@ Map<String, dynamic> createUserinfoRecordData({
   String? course,
   String? email,
   bool? isClassRepresentative,
-  String? name,
   String? phoneNumber,
   String? registrationNumber,
   int? yearOfStudy,
+  String? name,
+  String? photoUrl,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'course': course,
       'email': email,
       'isClassRepresentative': isClassRepresentative,
-      'name': name,
       'phoneNumber': phoneNumber,
       'registrationNumber': registrationNumber,
       'yearOfStudy': yearOfStudy,
+      'name': name,
+      'photo_url': photoUrl,
     }.withoutNulls,
   );
 
@@ -133,10 +141,11 @@ class UserinfoRecordDocumentEquality implements Equality<UserinfoRecord> {
     return e1?.course == e2?.course &&
         e1?.email == e2?.email &&
         e1?.isClassRepresentative == e2?.isClassRepresentative &&
-        e1?.name == e2?.name &&
         e1?.phoneNumber == e2?.phoneNumber &&
         e1?.registrationNumber == e2?.registrationNumber &&
-        e1?.yearOfStudy == e2?.yearOfStudy;
+        e1?.yearOfStudy == e2?.yearOfStudy &&
+        e1?.name == e2?.name &&
+        e1?.photoUrl == e2?.photoUrl;
   }
 
   @override
@@ -144,10 +153,11 @@ class UserinfoRecordDocumentEquality implements Equality<UserinfoRecord> {
         e?.course,
         e?.email,
         e?.isClassRepresentative,
-        e?.name,
         e?.phoneNumber,
         e?.registrationNumber,
-        e?.yearOfStudy
+        e?.yearOfStudy,
+        e?.name,
+        e?.photoUrl
       ]);
 
   @override

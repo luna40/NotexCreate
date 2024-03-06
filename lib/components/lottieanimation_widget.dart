@@ -43,7 +43,7 @@ class _LottieanimationWidgetState extends State<LottieanimationWidget> {
     return Align(
       alignment: const AlignmentDirectional(0.0, 0.0),
       child: Lottie.asset(
-        'assets/lottie_animations/Animation_-_1708553485186.json',
+        'assets/lottie_animations/Animation_-_1709386342242.json',
         width: 150.0,
         height: 130.0,
         fit: BoxFit.cover,

@@ -15,10 +15,12 @@ class UpdateUnitWidget extends StatefulWidget {
     super.key,
     required this.unitName,
     required this.noteType,
+    required this.chapterOne,
   });
 
   final String? unitName;
   final String? noteType;
+  final String? chapterOne;
 
   @override
   State<UpdateUnitWidget> createState() => _UpdateUnitWidgetState();
@@ -204,6 +206,9 @@ class _UpdateUnitWidgetState extends State<UpdateUnitWidget> {
                                     controller: textEditingController,
                                     focusNode: focusNode,
                                     onEditingComplete: onEditingComplete,
+                                    onFieldSubmitted: (_) async {
+                                      setState(() {});
+                                    },
                                     autofocus: true,
                                     obscureText: false,
                                     decoration: InputDecoration(
@@ -394,10 +399,18 @@ class _UpdateUnitWidgetState extends State<UpdateUnitWidget> {
                       ),
                       FFButtonWidget(
                         onPressed: () async {
-                          FFAppState().UnitNameAppState = widget.unitName!;
-                          FFAppState().pdfTypeAppState = widget.noteType!;
-                          FFAppState().chapterAppState = [];
                           Navigator.pop(context);
+                          setState(() {
+                            FFAppState().UnitNameAppState =
+                                _model.textController1.text;
+                            FFAppState().pdfTypeAppState =
+                                valueOrDefault<String>(
+                              _model.dropDownValue,
+                              'NotesPdf',
+                            );
+                            FFAppState().insertAtIndexInChapterAppState(
+                                0, _model.textController2.text);
+                          });
                           await showModalBottomSheet(
                             isScrollControlled: true,
                             backgroundColor: Colors.transparent,
@@ -407,7 +420,8 @@ class _UpdateUnitWidgetState extends State<UpdateUnitWidget> {
                                 padding: MediaQuery.viewInsetsOf(context),
                                 child: GeneratePdfWidget(
                                   unitName: FFAppState().UnitNameAppState,
-                                  pdfType: widget.noteType!,
+                                  chapterNameOneC: FFAppState().chapterAppState,
+                                  pdfTypeC: FFAppState().pdfTypeAppState,
                                 ),
                               );
                             },

@@ -1,3 +1,5 @@
+import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'generate_pdf_widget.dart' show GeneratePdfWidget;
 import 'package:flutter/material.dart';
@@ -30,6 +32,20 @@ class GeneratePdfModel extends FlutterFlowModel<GeneratePdfWidget> {
 
   bool buttonComponentState = true;
 
+  List<AddChapterAndImagesStruct> chapterindexlist = [];
+  void addToChapterindexlist(AddChapterAndImagesStruct item) =>
+      chapterindexlist.add(item);
+  void removeFromChapterindexlist(AddChapterAndImagesStruct item) =>
+      chapterindexlist.remove(item);
+  void removeAtIndexFromChapterindexlist(int index) =>
+      chapterindexlist.removeAt(index);
+  void insertAtIndexInChapterindexlist(
+          int index, AddChapterAndImagesStruct item) =>
+      chapterindexlist.insert(index, item);
+  void updateChapterindexlistAtIndex(
+          int index, Function(AddChapterAndImagesStruct) updateFn) =>
+      chapterindexlist[index] = updateFn(chapterindexlist[index]);
+
   ///  State fields for stateful widgets in this component.
 
   // State field(s) for TabBar widget.
@@ -37,8 +53,12 @@ class GeneratePdfModel extends FlutterFlowModel<GeneratePdfWidget> {
   int get tabBarCurrentIndex =>
       tabBarController != null ? tabBarController!.index : 0;
 
-  bool isDataUploading = false;
-  List<FFUploadedFile> uploadedLocalFiles = [];
+  bool isDataUploading1 = false;
+  List<FFUploadedFile> uploadedLocalFiles1 = [];
+
+  bool isDataUploading2 = false;
+  FFUploadedFile uploadedLocalFile2 =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
 
   /// Initialization and disposal methods.
 

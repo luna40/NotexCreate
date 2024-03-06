@@ -219,7 +219,20 @@ class _PhoneVerifyWidgetState extends State<PhoneVerifyWidget> {
                             return;
                           }
 
-                          context.pushNamedAuth('HomePage', context.mounted);
+                          context.pushNamedAuth(
+                            'createProfile',
+                            context.mounted,
+                            queryParameters: {
+                              'phoneNumber': serializeParam(
+                                FFAppState().registrationnumberApp,
+                                ParamType.String,
+                              ),
+                              'email': serializeParam(
+                                currentUserEmail,
+                                ParamType.String,
+                              ),
+                            }.withoutNulls,
+                          );
                         },
                         text: 'Confirm & Continue',
                         options: FFButtonOptions(

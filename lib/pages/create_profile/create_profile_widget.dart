@@ -1,6 +1,7 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
+import '/flutter_flow/flutter_flow_autocomplete_options_list.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -15,7 +16,14 @@ import 'create_profile_model.dart';
 export 'create_profile_model.dart';
 
 class CreateProfileWidget extends StatefulWidget {
-  const CreateProfileWidget({super.key});
+  const CreateProfileWidget({
+    super.key,
+    required this.phoneNumber,
+    required this.email,
+  });
+
+  final String? phoneNumber;
+  final String? email;
 
   @override
   State<CreateProfileWidget> createState() => _CreateProfileWidgetState();
@@ -33,10 +41,13 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      await currentUserReference!.update(createUsersRecordData(
-        displayName: '',
-        photoUrl: '',
-      ));
+      setState(() {
+        FFAppState().course = _model.courseValue!;
+        FFAppState().registrationnumberApp = _model.cityController.text;
+        FFAppState().userName = _model.yourNameController.text;
+        FFAppState().university = 'Chuka University';
+        FFAppState().userprofilepic = FFAppState().userprofilepic;
+      });
     });
 
     _model.yourNameController ??= TextEditingController();
@@ -45,8 +56,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
     _model.cityController ??= TextEditingController();
     _model.cityFocusNode ??= FocusNode();
 
-    _model.myBioController ??= TextEditingController();
-    _model.myBioFocusNode ??= FocusNode();
+    _model.uniController ??= TextEditingController();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -338,7 +348,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(24.0, 16.0, 24.0, 0.0),
                       child: FlutterFlowDropDown<String>(
-                        controller: _model.stateValueController ??=
+                        controller: _model.courseValueController ??=
                             FormFieldController<String>(null),
                         options: const [
                           'Software Engineering ',
@@ -394,7 +404,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                           'Wyoming'
                         ],
                         onChanged: (val) =>
-                            setState(() => _model.stateValue = val),
+                            setState(() => _model.courseValue = val),
                         width: double.infinity,
                         height: 56.0,
                         textStyle: FlutterFlowTheme.of(context).bodyMedium,
@@ -420,54 +430,101 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                     Padding(
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(24.0, 16.0, 24.0, 0.0),
-                      child: TextFormField(
-                        controller: _model.myBioController,
-                        focusNode: _model.myBioFocusNode,
-                        autofocus: true,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          labelText: 'Year',
-                          labelStyle: FlutterFlowTheme.of(context).labelMedium,
-                          hintText: 'Year of study',
-                          hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).alternate,
-                              width: 2.0,
+                      child: Autocomplete<String>(
+                        initialValue: const TextEditingValue(),
+                        optionsBuilder: (textEditingValue) {
+                          if (textEditingValue.text == '') {
+                            return const Iterable<String>.empty();
+                          }
+                          return ['Chuka University'].where((option) {
+                            final lowercaseOption = option.toLowerCase();
+                            return lowercaseOption
+                                .contains(textEditingValue.text.toLowerCase());
+                          });
+                        },
+                        optionsViewBuilder: (context, onSelected, options) {
+                          return AutocompleteOptionsList(
+                            textFieldKey: _model.uniKey,
+                            textController: _model.uniController!,
+                            options: options.toList(),
+                            onSelected: onSelected,
+                            textStyle: FlutterFlowTheme.of(context).bodyMedium,
+                            textHighlightStyle: const TextStyle(),
+                            elevation: 4.0,
+                            optionBackgroundColor:
+                                FlutterFlowTheme.of(context).primaryBackground,
+                            optionHighlightColor: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            maxHeight: 200.0,
+                          );
+                        },
+                        onSelected: (String selection) {
+                          setState(() => _model.uniSelectedOption = selection);
+                          FocusScope.of(context).unfocus();
+                        },
+                        fieldViewBuilder: (
+                          context,
+                          textEditingController,
+                          focusNode,
+                          onEditingComplete,
+                        ) {
+                          _model.uniFocusNode = focusNode;
+
+                          _model.uniController = textEditingController;
+                          return TextFormField(
+                            key: _model.uniKey,
+                            controller: textEditingController,
+                            focusNode: focusNode,
+                            onEditingComplete: onEditingComplete,
+                            autofocus: true,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              labelText: 'learning institution',
+                              labelStyle:
+                                  FlutterFlowTheme.of(context).labelMedium,
+                              hintText: 'Chuka University',
+                              hintStyle:
+                                  FlutterFlowTheme.of(context).labelMedium,
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).alternate,
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(12.0),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).secondary,
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(12.0),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(12.0),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(12.0),
+                              ),
+                              filled: true,
+                              fillColor: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              contentPadding: const EdgeInsetsDirectional.fromSTEB(
+                                  20.0, 24.0, 20.0, 24.0),
                             ),
-                            borderRadius: BorderRadius.circular(12.0),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).secondary,
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(12.0),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).error,
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(12.0),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).error,
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(12.0),
-                          ),
-                          filled: true,
-                          fillColor:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          contentPadding: const EdgeInsetsDirectional.fromSTEB(
-                              20.0, 24.0, 20.0, 24.0),
-                        ),
-                        style: FlutterFlowTheme.of(context).bodyMedium,
-                        cursorColor: FlutterFlowTheme.of(context).secondary,
-                        validator: _model.myBioControllerValidator
-                            .asValidator(context),
+                            style: FlutterFlowTheme.of(context).bodyMedium,
+                            cursorColor: FlutterFlowTheme.of(context).secondary,
+                            validator: _model.uniControllerValidator
+                                .asValidator(context),
+                          );
+                        },
                       ),
                     ),
                     Align(
@@ -478,16 +535,40 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                         child: FFButtonWidget(
                           onPressed: () async {
                             await UserinfoRecord.createDoc(
-                                    currentUserReference!)
-                                .set(createUserinfoRecordData(
+                              currentUserReference!,
+                              id: currentUserReference!.id,
+                            ).set(createUserinfoRecordData(
                               isClassRepresentative: false,
-                              course: '',
+                              course: _model.courseValue,
                               email: currentUserEmail,
-                              name: '',
-                              registrationNumber: '',
+                              name: _model.yourNameController.text,
+                              registrationNumber: _model.cityController.text,
+                              photoUrl: _model.uploadedFileUrl,
+                              phoneNumber: FFAppState().registrationnumberApp,
                             ));
+                            setState(() {
+                              FFAppState().userName = valueOrDefault<String>(
+                                _model.yourNameController.text,
+                                'name one',
+                              );
+                              FFAppState().university = valueOrDefault<String>(
+                                _model.uniController.text,
+                                'chuka uni',
+                              );
+                              FFAppState().userprofilepic =
+                                  _model.uploadedFileUrl;
+                              FFAppState().registrationnumberApp =
+                                  valueOrDefault<String>(
+                                _model.cityController.text,
+                                'reg no.',
+                              );
+                              FFAppState().course = valueOrDefault<String>(
+                                _model.courseValue,
+                                'defaultCourse',
+                              );
+                            });
 
-                            context.pushNamed('phoneSignIn');
+                            context.pushNamed('HomePage');
                           },
                           text: 'Save Changes',
                           options: FFButtonOptions(

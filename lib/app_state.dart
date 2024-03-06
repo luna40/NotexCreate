@@ -17,11 +17,20 @@ class FFAppState extends ChangeNotifier {
   Future initializePersistedState() async {
     prefs = await SharedPreferences.getInstance();
     _safeInit(() {
+      _userName = prefs.getString('ff_userName') ?? _userName;
+    });
+    _safeInit(() {
       _isSaved = prefs.getBool('ff_isSaved') ?? _isSaved;
     });
     _safeInit(() {
       _pdfImageGenerated =
           prefs.getString('ff_pdfImageGenerated') ?? _pdfImageGenerated;
+    });
+    _safeInit(() {
+      _university = prefs.getString('ff_university') ?? _university;
+    });
+    _safeInit(() {
+      _email = prefs.getString('ff_email') ?? _email;
     });
   }
 
@@ -36,6 +45,7 @@ class FFAppState extends ChangeNotifier {
   String get userName => _userName;
   set userName(String value) {
     _userName = value;
+    prefs.setString('ff_userName', value);
   }
 
   bool _isSaved = false;
@@ -55,35 +65,6 @@ class FFAppState extends ChangeNotifier {
   String get pdfTypeAppState => _pdfTypeAppState;
   set pdfTypeAppState(String value) {
     _pdfTypeAppState = value;
-  }
-
-  List<String> _imageslistAppstate = [];
-  List<String> get imageslistAppstate => _imageslistAppstate;
-  set imageslistAppstate(List<String> value) {
-    _imageslistAppstate = value;
-  }
-
-  void addToImageslistAppstate(String value) {
-    _imageslistAppstate.add(value);
-  }
-
-  void removeFromImageslistAppstate(String value) {
-    _imageslistAppstate.remove(value);
-  }
-
-  void removeAtIndexFromImageslistAppstate(int index) {
-    _imageslistAppstate.removeAt(index);
-  }
-
-  void updateImageslistAppstateAtIndex(
-    int index,
-    String Function(String) updateFn,
-  ) {
-    _imageslistAppstate[index] = updateFn(_imageslistAppstate[index]);
-  }
-
-  void insertAtIndexInImageslistAppstate(int index, String value) {
-    _imageslistAppstate.insert(index, value);
   }
 
   String _pdfCreatedAppstate = '';
@@ -126,6 +107,50 @@ class FFAppState extends ChangeNotifier {
 
   void insertAtIndexInChapterAppState(int index, String value) {
     _chapterAppState.insert(index, value);
+  }
+
+  String _PdfName = '';
+  String get PdfName => _PdfName;
+  set PdfName(String value) {
+    _PdfName = value;
+  }
+
+  String _PhoneNumber = '';
+  String get PhoneNumber => _PhoneNumber;
+  set PhoneNumber(String value) {
+    _PhoneNumber = value;
+  }
+
+  String _course = '';
+  String get course => _course;
+  set course(String value) {
+    _course = value;
+  }
+
+  String _registrationnumberApp = '';
+  String get registrationnumberApp => _registrationnumberApp;
+  set registrationnumberApp(String value) {
+    _registrationnumberApp = value;
+  }
+
+  String _university = 'Chuka University';
+  String get university => _university;
+  set university(String value) {
+    _university = value;
+    prefs.setString('ff_university', value);
+  }
+
+  String _email = '';
+  String get email => _email;
+  set email(String value) {
+    _email = value;
+    prefs.setString('ff_email', value);
+  }
+
+  String _userprofilepic = '';
+  String get userprofilepic => _userprofilepic;
+  set userprofilepic(String value) {
+    _userprofilepic = value;
   }
 }
 

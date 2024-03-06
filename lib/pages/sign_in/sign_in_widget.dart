@@ -81,39 +81,59 @@ class _SignInWidgetState extends State<SignInWidget> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 30.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  if (Theme.of(context).brightness ==
-                                      Brightness.light)
-                                    Align(
-                                      alignment:
-                                          const AlignmentDirectional(-1.0, -1.0),
-                                      child: Image.asset(
-                                        'assets/images/rightlightMode.png',
-                                        width: 150.0,
-                                        height: 115.0,
-                                        fit: BoxFit.contain,
+                            Align(
+                              alignment: const AlignmentDirectional(0.0, -1.0),
+                              child: Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 3.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    if (Theme.of(context).brightness ==
+                                        Brightness.light)
+                                      Align(
+                                        alignment:
+                                            const AlignmentDirectional(0.0, -1.0),
+                                        child: ClipRRect(
+                                          borderRadius: const BorderRadius.only(
+                                            bottomLeft: Radius.circular(20.0),
+                                            bottomRight: Radius.circular(20.0),
+                                            topLeft: Radius.circular(20.0),
+                                            topRight: Radius.circular(20.0),
+                                          ),
+                                          child: Image.asset(
+                                            'assets/images/Color_logo_with_background-removebg-preview.png',
+                                            width: 150.0,
+                                            height: 148.0,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                  if (Theme.of(context).brightness ==
-                                      Brightness.dark)
-                                    Image.asset(
-                                      'assets/images/Screenshot_from_2024-02-20_05-12-36.png',
-                                      width: 150.0,
-                                      height: 40.0,
-                                      fit: BoxFit.fitWidth,
-                                    ),
-                                ],
+                                    if (Theme.of(context).brightness ==
+                                        Brightness.dark)
+                                      ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(12.0),
+                                        child: Image.asset(
+                                          'assets/images/White_logo_-_no_background.png',
+                                          width: 150.0,
+                                          height: 164.0,
+                                          fit: BoxFit.fitWidth,
+                                        ),
+                                      ),
+                                  ],
+                                ),
                               ),
                             ),
-                            Text(
-                              'Welcome Back!',
-                              style: FlutterFlowTheme.of(context).displaySmall,
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 5.0, 0.0, 0.0),
+                              child: Text(
+                                'Welcome Back!',
+                                style:
+                                    FlutterFlowTheme.of(context).displaySmall,
+                              ),
                             ),
                             Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(

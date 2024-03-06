@@ -3,18 +3,23 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'chapter_cad_model.dart';
-export 'chapter_cad_model.dart';
+import 'pdf_name_card_copy_model.dart';
+export 'pdf_name_card_copy_model.dart';
 
-class ChapterCadWidget extends StatefulWidget {
-  const ChapterCadWidget({super.key});
+class PdfNameCardCopyWidget extends StatefulWidget {
+  const PdfNameCardCopyWidget({
+    super.key,
+    required this.chaptername,
+  });
+
+  final List<String>? chaptername;
 
   @override
-  State<ChapterCadWidget> createState() => _ChapterCadWidgetState();
+  State<PdfNameCardCopyWidget> createState() => _PdfNameCardCopyWidgetState();
 }
 
-class _ChapterCadWidgetState extends State<ChapterCadWidget> {
-  late ChapterCadModel _model;
+class _PdfNameCardCopyWidgetState extends State<PdfNameCardCopyWidget> {
+  late PdfNameCardCopyModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -25,10 +30,10 @@ class _ChapterCadWidgetState extends State<ChapterCadWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ChapterCadModel());
+    _model = createModel(context, () => PdfNameCardCopyModel());
 
-    _model.addchapterController ??= TextEditingController();
-    _model.addchapterFocusNode ??= FocusNode();
+    _model.addpdfController ??= TextEditingController();
+    _model.addpdfFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -45,10 +50,10 @@ class _ChapterCadWidgetState extends State<ChapterCadWidget> {
     context.watch<FFAppState>();
 
     return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 32.0),
+      padding: const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 12.0),
       child: Container(
         width: MediaQuery.sizeOf(context).width * 0.65,
-        height: 250.0,
+        height: 150.0,
         decoration: BoxDecoration(
           color: Colors.white,
           boxShadow: const [
@@ -68,7 +73,7 @@ class _ChapterCadWidgetState extends State<ChapterCadWidget> {
               child: Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
                 child: Text(
-                  'Add new chapter name here: ',
+                  'Name  your Pdf ',
                   style: FlutterFlowTheme.of(context).bodyLarge,
                 ),
               ),
@@ -78,12 +83,12 @@ class _ChapterCadWidgetState extends State<ChapterCadWidget> {
               child: Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
                 child: TextFormField(
-                  controller: _model.addchapterController,
-                  focusNode: _model.addchapterFocusNode,
+                  controller: _model.addpdfController,
+                  focusNode: _model.addpdfFocusNode,
                   autofocus: true,
                   obscureText: false,
                   decoration: InputDecoration(
-                    labelText: 'Add new chapter...',
+                    labelText: 'Pdf  name ...',
                     labelStyle: FlutterFlowTheme.of(context).labelMedium,
                     hintStyle: FlutterFlowTheme.of(context).labelMedium,
                     enabledBorder: OutlineInputBorder(
@@ -117,7 +122,7 @@ class _ChapterCadWidgetState extends State<ChapterCadWidget> {
                   ),
                   style: FlutterFlowTheme.of(context).bodyMedium,
                   validator:
-                      _model.addchapterControllerValidator.asValidator(context),
+                      _model.addpdfControllerValidator.asValidator(context),
                 ),
               ),
             ),
@@ -127,9 +132,9 @@ class _ChapterCadWidgetState extends State<ChapterCadWidget> {
                 padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 30.0, 0.0),
                 child: FFButtonWidget(
                   onPressed: () async {
+                    Navigator.pop(context);
                     setState(() {
-                      FFAppState().addToChapterAppState(
-                          _model.addchapterController.text);
+                      FFAppState().PdfName = _model.addpdfController.text;
                     });
                   },
                   text: 'Done',

@@ -19,11 +19,6 @@ class NotesRecord extends FirestoreRecord {
   List<String> get chapters => _chapters ?? const [];
   bool hasChapters() => _chapters != null;
 
-  // "display_name" field.
-  String? _displayName;
-  String get displayName => _displayName ?? '';
-  bool hasDisplayName() => _displayName != null;
-
   // "created_time" field.
   DateTime? _createdTime;
   DateTime? get createdTime => _createdTime;
@@ -49,14 +44,19 @@ class NotesRecord extends FirestoreRecord {
   DocumentReference? get userid => _userid;
   bool hasUserid() => _userid != null;
 
+  // "unitid" field.
+  String? _unitid;
+  String get unitid => _unitid ?? '';
+  bool hasUnitid() => _unitid != null;
+
   void _initializeFields() {
     _chapters = getDataList(snapshotData['chapters']);
-    _displayName = snapshotData['display_name'] as String?;
     _createdTime = snapshotData['created_time'] as DateTime?;
     _noteType = snapshotData['noteType'] as String?;
     _content = snapshotData['content'] as String?;
     _pdfName = snapshotData['pdfName'] as String?;
     _userid = snapshotData['userid'] as DocumentReference?;
+    _unitid = snapshotData['unitid'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -93,21 +93,21 @@ class NotesRecord extends FirestoreRecord {
 }
 
 Map<String, dynamic> createNotesRecordData({
-  String? displayName,
   DateTime? createdTime,
   String? noteType,
   String? content,
   String? pdfName,
   DocumentReference? userid,
+  String? unitid,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
-      'display_name': displayName,
       'created_time': createdTime,
       'noteType': noteType,
       'content': content,
       'pdfName': pdfName,
       'userid': userid,
+      'unitid': unitid,
     }.withoutNulls,
   );
 
@@ -121,23 +121,23 @@ class NotesRecordDocumentEquality implements Equality<NotesRecord> {
   bool equals(NotesRecord? e1, NotesRecord? e2) {
     const listEquality = ListEquality();
     return listEquality.equals(e1?.chapters, e2?.chapters) &&
-        e1?.displayName == e2?.displayName &&
         e1?.createdTime == e2?.createdTime &&
         e1?.noteType == e2?.noteType &&
         e1?.content == e2?.content &&
         e1?.pdfName == e2?.pdfName &&
-        e1?.userid == e2?.userid;
+        e1?.userid == e2?.userid &&
+        e1?.unitid == e2?.unitid;
   }
 
   @override
   int hash(NotesRecord? e) => const ListEquality().hash([
         e?.chapters,
-        e?.displayName,
         e?.createdTime,
         e?.noteType,
         e?.content,
         e?.pdfName,
-        e?.userid
+        e?.userid,
+        e?.unitid
       ]);
 
   @override

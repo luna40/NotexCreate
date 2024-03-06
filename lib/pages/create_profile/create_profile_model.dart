@@ -19,13 +19,15 @@ class CreateProfileModel extends FlutterFlowModel<CreateProfileWidget> {
   FocusNode? cityFocusNode;
   TextEditingController? cityController;
   String? Function(BuildContext, String?)? cityControllerValidator;
-  // State field(s) for state widget.
-  String? stateValue;
-  FormFieldController<String>? stateValueController;
-  // State field(s) for myBio widget.
-  FocusNode? myBioFocusNode;
-  TextEditingController? myBioController;
-  String? Function(BuildContext, String?)? myBioControllerValidator;
+  // State field(s) for course widget.
+  String? courseValue;
+  FormFieldController<String>? courseValueController;
+  // State field(s) for Uni widget.
+  final uniKey = GlobalKey();
+  FocusNode? uniFocusNode;
+  TextEditingController? uniController;
+  String? uniSelectedOption;
+  String? Function(BuildContext, String?)? uniControllerValidator;
 
   /// Initialization and disposal methods.
 
@@ -40,8 +42,7 @@ class CreateProfileModel extends FlutterFlowModel<CreateProfileWidget> {
     cityFocusNode?.dispose();
     cityController?.dispose();
 
-    myBioFocusNode?.dispose();
-    myBioController?.dispose();
+    uniFocusNode?.dispose();
   }
 
   /// Action blocks are added here.

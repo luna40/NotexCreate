@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'chapter_cad_widget.dart' show ChapterCadWidget;
+import 'chapter_card_widget.dart' show ChapterCardWidget;
 import 'package:flutter/material.dart';
 
-class ChapterCadModel extends FlutterFlowModel<ChapterCadWidget> {
+class ChapterCardModel extends FlutterFlowModel<ChapterCardWidget> {
   ///  State fields for stateful widgets in this component.
 
   // State field(s) for addchapter widget.

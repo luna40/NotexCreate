@@ -94,7 +94,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'createProfile',
               path: 'createProfile',
               requireAuth: true,
-              builder: (context, params) => const CreateProfileWidget(),
+              builder: (context, params) => CreateProfileWidget(
+                phoneNumber: params.getParam('phoneNumber', ParamType.String),
+                email: params.getParam('email', ParamType.String),
+              ),
             ),
             FFRoute(
               name: 'phoneSignIn',
@@ -133,6 +136,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => params.isEmpty
                   ? const NavBarPage(initialPage: 'library')
                   : const LibraryWidget(),
+            ),
+            FFRoute(
+              name: 'Dashboard',
+              path: 'dashboard',
+              builder: (context, params) => const DashboardWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),

@@ -1,16 +1,14 @@
 import '/flutter_flow/flutter_flow_util.dart';
 import 'phone_sign_in_widget.dart' show PhoneSignInWidget;
 import 'package:flutter/material.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class PhoneSignInModel extends FlutterFlowModel<PhoneSignInWidget> {
   ///  State fields for stateful widgets in this page.
 
-  // State field(s) for phoneNumber widget.
-  FocusNode? phoneNumberFocusNode;
-  TextEditingController? phoneNumberController;
-  final phoneNumberMask = MaskTextInputFormatter(mask: '(###) ###-####');
-  String? Function(BuildContext, String?)? phoneNumberControllerValidator;
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode;
+  TextEditingController? textController;
+  String? Function(BuildContext, String?)? textControllerValidator;
 
   /// Initialization and disposal methods.
 
@@ -19,8 +17,8 @@ class PhoneSignInModel extends FlutterFlowModel<PhoneSignInWidget> {
 
   @override
   void dispose() {
-    phoneNumberFocusNode?.dispose();
-    phoneNumberController?.dispose();
+    textFieldFocusNode?.dispose();
+    textController?.dispose();
   }
 
   /// Action blocks are added here.

@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'list_widget.dart' show ListWidget;
+import 'downloads_widget.dart' show DownloadsWidget;
 import 'package:flutter/material.dart';
 
-class ListModel extends FlutterFlowModel<ListWidget> {
+class DownloadsModel extends FlutterFlowModel<DownloadsWidget> {
   ///  State fields for stateful widgets in this component.
 
   // State field(s) for TextField widget.

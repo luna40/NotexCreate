@@ -10,9 +10,12 @@ class CreatedpdfWidget extends StatefulWidget {
   const CreatedpdfWidget({
     super.key,
     String? pdfName,
-  }) : pdfName = pdfName ?? 'pdfName';
+    String? unit,
+  })  : pdfName = pdfName ?? 'pdfName',
+        unit = unit ?? 'unit code';
 
   final String pdfName;
+  final String unit;
 
   @override
   State<CreatedpdfWidget> createState() => _CreatedpdfWidgetState();
@@ -52,11 +55,11 @@ class _CreatedpdfWidgetState extends State<CreatedpdfWidget> {
         width: 500.0,
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).primaryBackground,
-          boxShadow: const [
+          boxShadow: [
             BoxShadow(
               blurRadius: 0.0,
-              color: Color(0xFFF5FBFB),
-              offset: Offset(0.0, 1.0),
+              color: FlutterFlowTheme.of(context).secondaryBackground,
+              offset: const Offset(0.0, 1.0),
             )
           ],
         ),
@@ -83,7 +86,9 @@ class _CreatedpdfWidgetState extends State<CreatedpdfWidget> {
                             topRight: Radius.circular(4.0),
                           ),
                           child: Image.asset(
-                            'assets/images/Screenshot_from_2024-02-22_02-06-54-removebg-preview.png',
+                            Theme.of(context).brightness == Brightness.dark
+                                ? 'assets/images/Screenshot_from_2024-02-22_02-06-54-removebg-preview.png'
+                                : 'assets/images/Screenshot_from_2024-02-22_02-06-54-removebg-preview.png',
                             width: 52.0,
                             height: 52.0,
                             fit: BoxFit.cover,
@@ -112,7 +117,8 @@ class _CreatedpdfWidgetState extends State<CreatedpdfWidget> {
                                     .bodyMedium
                                     .override(
                                       fontFamily: 'Inter',
-                                      color: const Color(0xFF101518),
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
                                       fontSize: 14.0,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -121,7 +127,7 @@ class _CreatedpdfWidgetState extends State<CreatedpdfWidget> {
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 4.0, 0.0, 0.0),
                                 child: Text(
-                                  'UnitCode',
+                                  widget.unit,
                                   style: FlutterFlowTheme.of(context)
                                       .bodySmall
                                       .override(

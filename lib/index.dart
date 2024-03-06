@@ -10,3 +10,4 @@ export '/pages/phone_verify/phone_verify_widget.dart' show PhoneVerifyWidget;
 export '/pages/home_page/home_page_widget.dart' show HomePageWidget;
 export '/pages/profile_page/profile_page_widget.dart' show ProfilePageWidget;
 export '/pages/library/library_widget.dart' show LibraryWidget;
+export '/pages/dashboard/dashboard_widget.dart' show DashboardWidget;
